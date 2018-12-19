@@ -47,7 +47,7 @@ app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 
 mail = Mail(app)
-sslify = SSLify(app)
+
 Compress(app)
 
 ts = URLSafeTimedSerializer(app.config["SECRET_KEY"])
