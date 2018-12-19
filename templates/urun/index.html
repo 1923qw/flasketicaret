@@ -1,0 +1,86 @@
+{% extends "/template.html" %} 
+{% block title %}{{product.ad}} - {% endblock %}
+{% block meta %}
+<!-- Google / Search Engine Tags -->
+<meta itemprop="name" content="RedGingger - Shop for Trending Sunglasses">
+<meta itemprop="description" content="Get most trending Sunglasses, Eyeglasses for boys & girls. FREE shipping, Cash on Delivery and 10 Days return only at redgingger.com">
+<meta itemprop="image" content="https://redgingger.com/product_images?image={{product.image_2}}">
+
+
+<meta property="og:type"        content="product" />
+<meta property="og:title"       content="{{product.ad}} | RedGingger" />
+<meta property="og:description" content="{{ product.diger_detaylar }}" />
+<meta property="og:image"       content="https://redgingger.com/product_images?image={{product.image_2}}" />
+
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="RedGingger - Shop for Trending Sunglasses">
+<meta name="twitter:description" content="Get most trending Sunglasses, Eyeglasses for boys & girls. FREE shipping, Cash on Delivery and 10 Days return only at redgingger.com">
+{% endblock %}
+{% block content %}
+<div class="container product-big-details">
+    <div class="card product">
+        <div class="left">
+            <img src="/product_images?image={{product.image_1}}" alt="{{product.ad}}" id="main-image-product">
+            <div class="smallimgs">
+                <img src="/product_images?image={{product.image_1}}" alt="{{product.ad}} image 1">
+               
+            </div>
+        </div>
+        <div class="right">
+            <h1 class="p-title">{{product.ad}}</h1>
+            <p>
+                {{product.diger_detaylar}}
+            </p>
+            <p class="sell-price">{{ (product.satis_fiyati) }} ₺
+                
+                <span class="count">
+                    {% if product.adet >= 1 %}
+                        Stokta
+                    {% else %}
+                        Stokta Yok !
+                    {% endif %}
+                </span>
+            </p>
+            {% if product.kategori %}
+                <p class="text">
+                <span class="list-circle"></span>Kategori : {{product.kategori}}</p>
+            {% endif %}
+            {% if product.adet %}
+            <p class="text">
+                <span class="list-circle"></span>Stok Adedi : {{product.adet}}</p>
+            {% endif %}
+            <!-- {% if product.other_details %}
+            <p class="text other-details">{{ product.other_details}}</p>
+            {% endif %} -->
+            <div class="button-group">
+                {% if product.adet >= 1 %}
+                    <a class="btn btn-highlight" href="{{url_for('satin_al', product_id=product.id)}}">Satın Al</a>
+                    <a class="btn btn-dark" href="{{url_for('sepete_ekle', product_id=product.id)}}">Sepete Ekle</a>
+                {% else %}
+                    
+                {% endif %}            
+            </div>
+        </div>
+    </div>
+  
+</div>
+
+
+<script>
+    $('#example').barrating({
+        theme: 'fontawesome-stars'
+    });
+    $('.reviewratings---').barrating({
+        theme: 'fontawesome-stars'
+    });
+    $('.reviewratings---').barrating('readonly', true);
+
+
+    $('.product .left .smallimgs img').on('click', function(e) {
+        let attrib = $(this).attr('src');
+        $('#main-image-product').attr('src', attrib);
+    });
+
+</script>
+{% endblock %}

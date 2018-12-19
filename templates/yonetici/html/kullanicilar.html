@@ -1,0 +1,36 @@
+{% extends "yonetici/html/layout.html" %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                    <div class="card-header" data-background-color="orange">
+                        <h4 class="title">Kullanıcılar</h4>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table table-hover">
+                            <thead class="text-primary">
+                                <tr><th>ID</th>
+                                <th>İsim</th>
+                                <th>Email</th>
+                                <th>Telefon</th>
+                                <th>Kayıt Tarihi</th>
+                            </tr></thead>
+                            <tbody>
+                                {% for user in data %}
+                                    <tr>
+                                        <td>{{ user.id }}</td>
+                                        <td>{{ user.isim }}</td>
+                                        <td>{{ user.email }}</td>
+                                        <td>{{ user.telefon }}</td>
+                                        <td>{{ user.katilma_zamani }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

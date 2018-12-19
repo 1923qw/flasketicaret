@@ -1,0 +1,33 @@
+{% extends "template.html" %}
+{% block title %}{{ user.ad }} - {% endblock %}
+{% block content %}
+<div class="cart user-profile container">
+    <p class="title">Hoşgeldin! {{ user.ad }}</p>
+
+    {% for product in products %}
+    <div class="card">
+        <div class="item">
+            <div class="left">
+                <img src="/product_images?image={{product.image_1}}" alt="">
+            </div>
+            <div class="right">
+                <p class="quantity">Sipariş ID: {{ product.satisgecmisi.siparis_id }}</p>
+                <p class="quantity">Ürün Adı: {{ product.ad }}</p>
+                <p class="quantity">Adet : {{ product.satisgecmisi.urun_adedi }}</p>
+                <p class="quantity">Durum : {{ product.satisgecmisi.durum }}</p>
+                <p class="quantity">Sipariş Tarihi : {{product.satisgecmisi.teslim_zamani}}</p>
+            </div>
+        </div>
+        <div class="button">
+            {%if product.satisgecmisi.durum == 'Hazırlanıyor'%}
+            <a class="btn btn-highlight" href="{{url_for('siparis_iptal', id=product.satisgecmisi.siparis_id)}}">İptal</a>
+            {%elif product.satisgecmisi.durum == 'Teslim Edildi' %}
+            <a class="btn btn-highlight" href="/iade">İade</a>
+            {% elif product.satisgecmisi.durum == 'İptal Edildi'%}
+            <a class="btn btn-highlight" href="#">İptal Edildi</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

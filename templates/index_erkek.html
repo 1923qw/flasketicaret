@@ -1,0 +1,55 @@
+{% extends "template.html" %} 
+{% block title %}Erkek Ürünler - {% endblock %}
+{% block content %}
+
+
+<div class="container">
+    <div class="p__categories">
+        <p style="text-align:right">
+            <a  href="{{url_for('index')}}">Tümü</a>
+            <a class="active">Erkek</a>
+            <a  href="{{url_for('urun_kadinlar')}}">Kadın</a>
+        </p>
+    </div>
+</div>
+
+<div class="products container p-grid">
+    {% for item in products %}
+    <div class="p-grid-item">
+        <a  href="{{ url_for('urun_sayfasi', ad=item.baslik) }}">
+            <div class="card">
+                <div class="item-price">
+                    <div class="left"></div>
+                    <div class="right">
+                       
+                        <span>{{ item.satis_fiyati }} ₺</span>
+                    </div>
+                </div>
+                <img src="/product_images?image={{item.image_1}}" alt="{{item.ad}}">
+                <div class="product-details">
+                    <p>{{item.ad}}</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    {% else %}
+        <p style="text-align:center; width: 100%">Üzgünüz Hiç Ürün Yok</p>
+    {% endfor %}
+</div>
+<script>
+        var slideIndex = 0;
+        carousel();
+
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none"; 
+            }
+            slideIndex++;
+            if (slideIndex > x.length) {slideIndex = 1} 
+            x[slideIndex-1].style.display = "block"; 
+            setTimeout(carousel, 2500); // Change image every 2 seconds
+        }
+</script>
+{% endblock %}

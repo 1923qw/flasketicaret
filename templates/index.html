@@ -1,0 +1,73 @@
+{% extends "template.html" %} {% block content %}
+{% block title %}{% endblock %}
+{% block meta %}
+<meta name="description" content="Bu bir e-ticaret uygulamasıdır.">
+<!-- Google / Search Engine Tags -->
+<meta itemprop="name" content="Süna Mağazacılık">
+<meta itemprop="description" content="Birbirinden farklı ürünler satın alın">
+<meta itemprop="image" content="http://www.duzce.edu.tr/include/v1_8_10/images/logo.png">
+
+<!-- Facebook Meta Tags -->
+<meta property="og:url" content="https://redgingger.com">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Süna Mağazacılık">
+<meta property="og:description" content="Birbirinden farklı ürünler satın alın">
+<meta property="og:image" content="http://www.duzce.edu.tr/include/v1_8_10/images/logo.png">
+
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Süna Mağazacılık">
+<meta name="twitter:description" content="Birbirinden farklı ürünler satın alın">
+{% endblock %}
+
+
+<div class="container">
+    <div class="p__categories">
+        <p style="text-align:right">
+            <a class="active">Tümü</a>
+            <a  href="{{url_for('urun_erkekler')}}">Erkek</a>
+            <a  href="{{url_for('urun_kadinlar')}}">Kadın</a>
+        </p>
+    </div>
+</div>
+
+<div class="products container p-grid">
+    {% for item in products %}
+    <div class="p-grid-item">
+        <a  href="{{ url_for('urun_sayfasi', ad=item.baslik) }}">
+            <div class="card">
+                <div class="item-price">
+                    <div class="left"></div>
+                    <div class="right">
+                       
+                        <span>{{ item.satis_fiyati }} ₺</span>
+                    </div>
+                </div>
+                <img src="/product_images?image={{item.image_1}}" alt="{{item.ad}}">
+                <div class="product-details">
+                    <p>{{item.ad}}</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    {% else %}
+        <p style="text-align:center; width: 100%">Üzgünüm.Hiç ürün yok !</p>
+    {% endfor %}
+</div>
+<script>
+        var slideIndex = 0;
+        carousel();
+
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none"; 
+            }
+            slideIndex++;
+            if (slideIndex > x.length) {slideIndex = 1} 
+            x[slideIndex-1].style.display = "block"; 
+            setTimeout(carousel, 2500); // Change image every 2 seconds
+        }
+</script>
+{% endblock %}

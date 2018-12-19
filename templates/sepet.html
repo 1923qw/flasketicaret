@@ -1,0 +1,39 @@
+{% extends "template.html" %} 
+{% block title %}Sepet - {% endblock %}
+{% block content %} 
+<div class="cart container">
+    <div class="card">
+        <div class="heading">Alışveriş Sepeti</div>
+        {% for product in products %}
+        <div class="item">
+            <div class="left">
+                <img src="/product_images?image={{product.image_1}}" alt="">
+            </div>
+            <div class="right">
+                <p>{{ product.ad }}</p>
+                
+                <p class="price">Fiyat : ₺{{ product.satis_fiyati }} x {{ product.sepet.adet }} =  ₺{{product.satis_fiyati * product.sepet.adet }}</p>
+                <p class="quantity">Adet : {{ product.sepet.adet }}</p>
+                <p class="note">Çok adette almak için ürünü tekrar sepete ekleyiniz.</p>
+                <a class="btn btn-small" href="{{url_for('sepetten_sil', product_id=product.id)}}">Sil</a>
+				<a class="btn btn-small" href="{{url_for('adet_artir', product_id=product.id)}}">+</a>
+				<a class="btn btn-small" href="{{url_for('adet_azalt', product_id=product.id)}}">-</a>
+				
+            </div>
+        </div>
+        {% else %}
+            <p style="text-align: center; width:100%">Henüz sepete ürün eklemediniz.</p>
+        {% endfor %}
+        <div class="button">
+            {% if products %}
+			    
+                <a class="btn btn-highlight" style="margin-right:10px;"  href="{{url_for('sepet_bosalt')}}">Tüm Sepeti Temizle</a>
+				<a class="btn btn-highlight" href="{{url_for('odeme')}}">Öde</a>
+				
+            {% else %}
+                <a class="btn btn-highlight" href="{{url_for('index')}}">Alışverişe Devam Et</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

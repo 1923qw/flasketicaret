@@ -1,0 +1,57 @@
+{% extends "template.html" %} 
+{% block title %}Ödeme - {% endblock %}
+{% block content %}
+<div class="checkout container">
+    <div class="card">
+        {% if products %}
+        <div class="left">
+            <p>Adresiniz</p>
+            <form action="/odeme/" class="form" method="POST">
+                <div class="field">
+                    <input type="text" name="fullname" placeholder="Adınız" required>
+                </div>
+                <div class="field">
+                    <input type="text" name="hostelname" placeholder="Adresiniz" required>
+                </div>
+                <div class="field">
+                    <input type="text" name="mobileno" placeholder="Telefon Numaranız" required>
+                </div>
+                <hr>
+                <p>Ödeme Yöntemi</p>
+                <div class="field radio">
+                    <input type="radio" name="pay" id="" value="Kapıda Ödeme" checked required> Kapıda Ödeme
+                    <p>Teslimat anında ödeme yapabilirsiniz.</p>
+                </div>
+                <hr>
+                <button type="submit" class="btn">Sipariş Ver</button>
+            </form>
+        </div>
+        <div class="right">
+            <p>Alışveriş Özeri</p>
+            <table>
+                <thead>
+                    <th>Ürün</th>
+                    <th>Adet</th>
+                    <th>Fiyat</th>
+                </thead>
+                <tfoot>
+                    <td colspan="2">Ara Toplam</td>
+                    <td> {{totalprice}} ₺</td>
+                </tfoot>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>{{product.ad}}</td>
+                        <td>{{product.sepet.adet}}</td>
+                        <td>Rs. {{product.satis_fiyati}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p style="text-align: center; width: 100%">Sepette Ürün Yok.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

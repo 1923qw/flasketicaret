@@ -1,0 +1,50 @@
+{% extends "yonetici/html/layout.html" %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                    <div class="card-header" data-background-color="orange">
+                        <h4 class="title">Siparişler</h4>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table table-hover">
+                            <thead class="text-primary">
+                                <tr><th>ID</th>
+                                <th>Müşteri Adı</th>
+                                <th>Ürün Adı</th>
+                                <th>Adet</th>
+                                <th>Adres</th>
+                                <th>Telefon</th>
+                                <th>Ödeme Yöntemi</th>
+                                <th>Durum</th>
+                                <th>Teslim</th>
+                                <th>Zaman</th>
+                                <th>Teslim Zamanı</th>
+                                <th>Düzenle</th>
+                            </tr></thead>
+                            <tbody>
+                                {% for item in products %}
+                                    <tr>
+                                        <td>{{ item.id }}</td>
+                                        <td>{{ item.musteri_adi }}</td>
+                                        <td>{{ item.urun_adi }}</td>
+                                        <td>{{ item.urun_adedi }}</td>
+                                        <td>{{ item.musteri_adresi }}</td>
+                                        <td>{{ item.telefon }}</td>
+                                        <td>{{ item.odeme_yontemi }}</td>
+                                        <td>{{ item.durum }}</td>
+                                        <td>{{ item.teslim }}</td>
+                                        <td>{{ item.satis_zamani }}</td>
+                                        <td>{{ item.teslim_zamani }}</td>
+                                        <td><a href="{{ url_for('yonetici_siparis_duzenle', order_id=item.id) }}" class="btn btn-primary btn-sm">Düzenle</a></td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
